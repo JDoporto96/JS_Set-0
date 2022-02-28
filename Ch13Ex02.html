@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=}, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button id="myButton">Press</button>
+    <meter value="0" min="0" max="3" id="counter">
+    </meter>
+    
+<script type="text/javascript">
+    button = document.getElementById("myButton");
+    met=document.getElementById("counter");
+    button.addEventListener("click",function handler(e){
+        met.value++;
+        if(met.value==3){
+            button.removeEventListener("click",handler);
+        }
+    });
+
+</script
+</body>
+</html>

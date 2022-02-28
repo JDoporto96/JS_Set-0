@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	body{
+		margin: 0;
+		font-size: 14px;
+	}
+
+	*{
+		box-sizing: border-box;
+	}
+
+	.gui{
+		padding: 20px;
+		float: left;
+		width: 20%;
+	}
+
+	.output{
+		padding: 20px;
+		float: left;
+		width:80%;
+	}
+
+    input{
+	    display: block;
+	    width: 100%;
+	    border: 1px solid rgb(3, 3, 3);
+	    border-radius: 2px;
+    }
+
+    button{
+        margin-top: 10px;
+    }
+
+    table{
+	    border-collapse: collapse;
+    }
+
+    td{
+        border: 3px solid #000;
+	    width: 40px; 
+	    height: 40px;
+    }
+	
+</style>
+</head>
+<body>
+    <div class="gui">
+	    <h3>User's input</h3>
+			<label for="columns">Columns</label>
+			<input type="number" id="columns"/>
+
+			<label for="rows">Rows</label>
+			<input type="number" id="rows"/>
+
+            <button onclick="createGrid(); "> Submit </button>
+			
+		
+    </div>
+
+    <div class="output">
+	    <h3>Output</h3>
+	    <div id="grid">
+			
+	    </div>
+    </div>
+
+<script type="text/javascript">
+	function createGrid(){
+		
+		columns = document.getElementById("columns").value;
+		rows = document.getElementById("rows").value;
+		grid = document.getElementById("grid");
+		grid.childNodes[0].remove();
+		tab = document.createElement("table");
+			for(var i =0; i<rows; i++){
+				var tr = document.createElement("tr");
+				for(var j =0; j<columns; j++){
+					var td = document.createElement("td");
+					tr.appendChild(td);
+				}
+			tab.appendChild(tr);
+			}
+		grid.appendChild(tab);
+		
+	}
+    
+
+</script>
+</body>
+</html>

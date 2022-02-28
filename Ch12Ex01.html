@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id='a' class='square' style='display:inline-block' val='something important'>Div element</div>
+    
+    <h3>Attributes:</h3>
+    <ul id="atts">
+    </ul>   
+
+    <script type="text/javascript">
+        function printAttr(element,attributes){
+            list = document.getElementById("atts")
+            for(var i=0; i<attributes.length; i++){
+			    var li = document.createElement("li");
+			    li.appendChild(document.createTextNode(element.getAttribute(attributes[i])));
+			    list.appendChild(li);
+		    }
+	    }
+
+        var el = document.getElementById("a");
+	    printAttr(el,['id','class','style','val','none']);
+
+    </script>
+</body>
+</html>

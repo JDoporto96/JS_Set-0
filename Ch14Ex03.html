@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	    body{
+                margin: 20px;
+                font-size: 14px;
+            }
+			*{
+                box-sizing: border-box;
+            }
+
+        #content{
+		    width: 100%;
+		    margin: 0 auto;
+	    }
+		.article{
+			width: 700px;
+			clear: both;
+			margin-bottom: 10px;
+		}
+		.article img{
+			float: left;
+            margin: 10px;
+			height: 150px;
+            width:300px;
+			border-radius: 5%;
+		}
+		.article .text .title{
+			margin: 5px;
+		}
+            	
+		.article .text{
+			font-size: 17px;
+			height: 150px;
+			overflow: hidden;
+			    	
+		}
+		.article .text p{
+			margin: 0 10;
+		}
+		.article .counter{
+			width: 30px;
+			height: 30px;
+			background-color: rgb(226, 223, 218);
+			text-align: center;
+			font-size: 25px;
+			border-radius: 50%;
+			position: relative;
+			top: 30px;
+			
+
+		}
+		.article a{
+			display: none;
+		}
+
+
+		.article2{
+			width: 800px;
+			clear: both;
+			margin-bottom: 10px;
+		}
+		.article2 img{
+			float: left;
+            margin: 10px;
+			height: 300px;
+            width:550px;
+			border-radius: 5%;
+		}
+		.article2 .text .title{
+			margin: 10px;
+			padding: 8px;
+		}
+		.article2 .text{
+			font-size: 19px;
+			height: 300px;
+			
+            	
+		}
+		.article2 .counter{
+		display: none;
+		}
+		.article2 a{
+			text-decoration: underline;
+		}
+		.article2 a:hover{
+			cursor: pointer;
+			color: blue;
+			
+		}
+            	
+		
+		
+		
+
+	</style>
+</head>
+<body>
+	<div id="content">
+	</div>
+	<template id="template1">
+		<article class="article">
+			<div class="counter">Count</div>
+			<img >
+			<div class="text">
+				
+				<h2 class="title"></h2>
+				<p></p>
+				<a>Go back</a>
+			</div>
+			
+		</article>
+	</template>	
+
+	<script type="text/javascript">
+
+
+		
+			
+
+		function createf(htmlStr) {
+		    var frag = document.createDocumentFragment(),
+		        temp = document.createElement('div');
+		    temp.innerHTML = htmlStr;
+		    while (temp.firstChild) 
+		        frag.appendChild(temp.firstChild);
+		    return frag;
+		}
+
+		function displayArt(art){
+			if(art.className == 'article'){
+				articleCache = createf(content.innerHTML);
+				
+					while (content.firstChild) 
+						content.removeChild(content.firstChild);
+				art.className='article2';
+				content.appendChild(art);
+			}else{
+				while (content.firstChild) 
+						content.removeChild(content.firstChild);
+				content.appendChild(articleCache);
+			}
+		}
+
+		function populate(data){
+
+			const content= document.getElementById("content");
+			var template =document.getElementById("template1").content,
+			fragment = document.createDocumentFragment(),
+			counter=1;
+			data.forEach(el =>{
+				template.querySelector("img").setAttribute("src",el.img);
+				template.querySelector("h2").textContent =el.title;
+				template.querySelector("p").textContent =el.txt;
+				template.querySelector("div").textContent =counter;
+				counter++;
+				let clone = document.importNode(template,true);
+				fragment.appendChild(clone);
+			});
+			content.appendChild(fragment);
+		}
+
+		function loadJSON(){
+			fetch("./data.json")
+			.then(res=>res.json())
+			.then(data =>populate(data));
+		}
+
+		loadJSON();
+
+        content.onclick = function(event) {
+            let art = event.target.closest('article');
+            if (!art) return; 
+			displayArt(art);
+            
+
+        };
+
+	</script>
+
+	
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        body{
+                margin: 0;
+                font-size: 14px;
+            }
+            *{
+                box-sizing: border-box;
+            }
+            .gui{
+                padding: 10px;
+                border: 1px dotted #ccc;
+            }
+            .result{
+                padding: 10px;
+                float: left;
+                width: 100%;
+            }
+            </style>
+        </head>
+        <body>
+        <body>
+        <div class="gui">
+            
+                
+                    <label for="columns">Number of Columns</label>
+                    <select id="number" onchange="changeColumns();">
+                        <option value="1">1</input>
+                        <option value="2">2</input>
+                        <option value="3">3</input>
+                        <option value="4">4</input>
+                    </select>
+        
+          
+        </div>
+        <div class="text" id="text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab facere dolor, tempore dignissimos cumque minus sit aspernatur cum ullam, sunt vero necessitatibus modi a nam! Esse ex similique perspiciatis laudantium.
+            Perferendis id sed architecto fugit neque, sequi asperiores magnam quae provident autem corrupti explicabo tempore molestias, tempora, expedita deleniti aliquid ut voluptatum nisi et dignissimos repudiandae doloribus officia. Omnis, perferendis.
+            Veritatis, unde sed? Consequuntur, quas. Sint exercitationem repudiandae aliquid reiciendis pariatur eius labore veritatis ducimus, quas laborum magni molestias alias neque optio modi. Ratione, debitis libero dignissimos reprehenderit corporis ipsa!
+            Voluptate neque cum amet soluta animi ipsa nam quo voluptas laboriosam accusamus quae iste dignissimos commodi nisi sit ab, velit debitis esse. Mollitia similique quaerat non commodi dolores excepturi omnis.
+            Quidem eum, soluta asperiores unde veniam deleniti modi sequi nesciunt ullam quod porro magnam in recusandae id delectus. Voluptatibus corporis incidunt quam beatae vero cumque sed natus voluptate repellendus assumenda!
+
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut debitis a quis minus dignissimos repudiandae eaque nisi temporibus modi eveniet. Itaque id at architecto a magni explicabo laudantium fuga nisi.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quasi, eum earum dicta illo minus repudiandae inventore, nihil dolores consequuntur magnam pariatur tempora quo ullam nemo maiores saepe, eius velit?
+            Nemo distinctio veniam voluptatibus repellat dolore recusandae, aspernatur voluptas minima eius minus quis voluptatem maxime officiis quae pariatur, ullam similique cupiditate esse quisquam. Cumque cupiditate, praesentium voluptas nam blanditiis suscipit!
+            Perspiciatis dolor quidem ratione. Ad minima minus quibusdam inventore tempore. Quisquam cum cumque saepe odio fugit voluptate qui esse, dicta autem repudiandae, expedita ipsa porro voluptatibus deleniti sint laborum dolorem.
+            Magni, dolorem? Explicabo asperiores rerum placeat hic sed eos culpa inventore autem perferendis nobis? Quasi ipsum explicabo facilis, voluptates id quisquam rerum. Hic doloribus aspernatur ducimus autem neque, alias quasi.
+            </div>
+        <script type="text/javascript">
+            
+            function changeColumns(){
+                var text=document.getElementById("text");
+                var col =document.getElementById("number").value;
+                text.style="columns:"+col;
+            };
+        </script>
+        </body>
+        </html>
