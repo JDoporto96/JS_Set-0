@@ -38,7 +38,9 @@ with(myLib.math){
 
 var answer2;
 var ans2;
-(function(m){
-    (function(r){
-		answer2 = r.sub(r.add(20,22),r.mul(2,5));})(m.real)
-		ans2 = m.matrix.times(m.matrix.eye (4), m.complex.sub (new m.complex.Num (m.real.add(5,2),-3), new m.complex.Num (3,4)));})(myLib.math);
+const m = myLib.math, r = m.real;
+answer2 = r.sub(r.add(20,22),r.mul(2,5));
+ans2 = m.matrix.times(m.matrix.eye (4), m.complex.sub (new m.complex.Num (m.real.add(5,2),-3), new m.complex.Num (3,4)));
+
+
+

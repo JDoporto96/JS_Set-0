@@ -4,13 +4,24 @@
 
 class Image{
     constructor(data, width, height,name){
-        this.name = name;
-        this.width = width;
-        this.height = height;
-        this.data= data;
+        if (width*height==data.length){
+            this.name = name;
+            this.width = width;
+            this.height = height;
+            this.data= data;
+        }
+        else{
+            throw new Error("Data array and image must be of same size")
+        }
+       
     }
     pixelData(x,y){
-        return this.data[(y*this.height+x)];
+        if((0<x && x< this.width) &&(0<y && y<this.height)){
+            return this.data[(y*this.height+x)];
+        }
+        else{
+            throw new Error("Incompatible data point. Point out of range")
+        }
     }
 }
 

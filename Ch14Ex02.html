@@ -17,10 +17,22 @@
                 padding: 10px;
                 border: 1px dotted #ccc;
             }
-            .result{
+            #text1{
                 padding: 10px;
                 float: left;
                 width: 100%;
+            }
+            .text1{
+                columns: 1;
+            }
+            .text2{
+                columns: 2;
+            }
+            .text3{
+                columns: 3;
+            }
+            .text4{
+                columns: 4;
             }
             </style>
         </head>
@@ -39,7 +51,8 @@
         
           
         </div>
-        <div class="text" id="text">
+        <div class="text1" id="text1">
+            <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab facere dolor, tempore dignissimos cumque minus sit aspernatur cum ullam, sunt vero necessitatibus modi a nam! Esse ex similique perspiciatis laudantium.
             Perferendis id sed architecto fugit neque, sequi asperiores magnam quae provident autem corrupti explicabo tempore molestias, tempora, expedita deleniti aliquid ut voluptatum nisi et dignissimos repudiandae doloribus officia. Omnis, perferendis.
             Veritatis, unde sed? Consequuntur, quas. Sint exercitationem repudiandae aliquid reiciendis pariatur eius labore veritatis ducimus, quas laborum magni molestias alias neque optio modi. Ratione, debitis libero dignissimos reprehenderit corporis ipsa!
@@ -51,13 +64,27 @@
             Nemo distinctio veniam voluptatibus repellat dolore recusandae, aspernatur voluptas minima eius minus quis voluptatem maxime officiis quae pariatur, ullam similique cupiditate esse quisquam. Cumque cupiditate, praesentium voluptas nam blanditiis suscipit!
             Perspiciatis dolor quidem ratione. Ad minima minus quibusdam inventore tempore. Quisquam cum cumque saepe odio fugit voluptate qui esse, dicta autem repudiandae, expedita ipsa porro voluptatibus deleniti sint laborum dolorem.
             Magni, dolorem? Explicabo asperiores rerum placeat hic sed eos culpa inventore autem perferendis nobis? Quasi ipsum explicabo facilis, voluptates id quisquam rerum. Hic doloribus aspernatur ducimus autem neque, alias quasi.
-            </div>
+            </p>    
+        </div>
         <script type="text/javascript">
-            
+            function createf(htmlStr) {
+		    var frag = document.createDocumentFragment(),
+		        temp = document.createElement('div');
+		    temp.innerHTML = htmlStr;
+		    while (temp.firstChild) 
+		        frag.appendChild(temp.firstChild);
+		    return frag;
+		    }
+
             function changeColumns(){
-                var text=document.getElementById("text");
+                var text=document.getElementById("text1");
                 var col =document.getElementById("number").value;
-                text.style="columns:"+col;
+                frag=createf(text.innerHTML);
+                while(text.firstChild){
+                    text.removeChild(text.firstChild)
+                }
+                text.className="text"+col;
+                text.appendChild(frag);
             };
         </script>
         </body>

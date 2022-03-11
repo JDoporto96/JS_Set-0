@@ -15,17 +15,23 @@
 
     <script type="text/javascript">
         function printAttr(element,attributes){
-            list = document.getElementById("atts")
+            var atts=[];
             for(var i=0; i<attributes.length; i++){
-			    var li = document.createElement("li");
-			    li.appendChild(document.createTextNode(element.getAttribute(attributes[i])));
-			    list.appendChild(li);
+                atts.push(element.getAttribute(attributes[i]));
 		    }
+            return atts;
 	    }
 
         var el = document.getElementById("a");
-	    printAttr(el,['id','class','style','val','none']);
+	    array = printAttr(el,['id','class','style','val','none']);
 
+        list = document.getElementById("atts")
+        for(attribute of array){
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(attribute));
+		    list.appendChild(li);
+        }
+        
     </script>
 </body>
 </html>

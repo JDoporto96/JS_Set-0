@@ -1,8 +1,8 @@
 //Ch03 Ex05
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
-function printObjProp(obj, bool=false){
-    if (bool==false){
+function printObjProp(obj, objOnly=false){
+    if (objOnly==false){
         for(let prop in obj){
             console.log(prop);
         }

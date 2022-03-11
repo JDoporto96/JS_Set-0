@@ -1,28 +1,30 @@
 //Ch08 Ex02
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
-
-class Timer{
-    constructor(){
-        this.functions=[];
-        this.times=[];
+function A(time){
+    if (time%1==0){
+        console.log("A "+ time +" seg have pased")
     }
-
-    addFunc(fn,time){
-        this.functions.push(fn);
-        this.times.push(time);
+}
+function B(time){
+    if (time%2==0){
+        console.log("B "+ time +" seg have pased")
     }
-
-    startTimer(){
-        for(let i=0;i<this.functions.length;i++){
-            setInterval(this.functions[i],this.times[i]);
-        }
+}
+function C(time){
+    if (time%3==0){
+        console.log("C "+ time +" seg have pased")
     }
 }
 
-var timer= new Timer();
-timer.addFunc(function(){console.log("A")},30000);
-timer.addFunc(function(){console.log("B")},60000);
-timer.addFunc(function(){console.log("C")},75000);
 
-timer.startTimer();
+var time=0;
+function timer(){
+    time+=1;
+    A(time);
+    B(time);
+    C(time);
+
+}
+
+setInterval(timer,1000);

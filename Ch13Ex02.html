@@ -14,14 +14,14 @@
     
 <script type="text/javascript">
     button = document.getElementById("myButton");
-    met=document.getElementById("counter");
-    button.addEventListener("click",function handler(e){
+    button.addEventListener("click",function handler(){
+        var met=document.getElementById("counter");
         met.value++;
         if(met.value==3){
             button.removeEventListener("click",handler);
         }
     });
 
-</script
+</script>
 </body>
 </html>

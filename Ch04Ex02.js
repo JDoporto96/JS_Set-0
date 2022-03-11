@@ -2,11 +2,12 @@
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 function addRec(array){
-    let sum=0;
-    for(var element of array){
-        sum+=element;
-    }
-    return sum
+    if (array.length === 1) {
+        return array[0];
+      }
+      else {
+        return array.pop() + addRec(array);
+      }
 }
 
 var arr = [ 1, 3, 5, 7];

@@ -4,20 +4,21 @@
 
 function dataType(...args){
     for(var obj of args){
-        if (typeof obj == "number"){
+        var type=typeof obj;
+        if (type == "number"){
             if(obj%1==0){
-                console.log ("number");  
+                console.log (type);  
             }
             else{
                 console.log ("float");}
         }
-        else if(typeof obj =="object"){
+        else if(type =="object"){
             if(Array.isArray(obj)){
                 console.log("array");
             }
-            else{console.log(typeof obj)};
+            else{console.log(type)};
         }
-        else{console.log(typeof obj)};
+        else{console.log(type)};
     }
 }
 

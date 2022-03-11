@@ -6,6 +6,7 @@
 	    body{
                 margin: 20px;
                 font-size: 14px;
+				counter-reset:count;
             }
 			*{
                 box-sizing: border-box;
@@ -27,18 +28,25 @@
             width:300px;
 			border-radius: 5%;
 		}
+		.article .text{
+			font-size: 20px;
+			height: 150px;
+			overflow: hidden;
+			
+			
+			    	
+		}
 		.article .text .title{
 			margin: 5px;
 		}
             	
-		.article .text{
-			font-size: 17px;
-			height: 150px;
-			overflow: hidden;
-			    	
-		}
+		
 		.article .text p{
 			margin: 0 10;
+			
+			
+	
+			
 		}
 		.article .counter{
 			width: 30px;
@@ -50,10 +58,28 @@
 			position: relative;
 			top: 30px;
 			
+		}
+		.article .counter::before{
+			counter-increment: count;
+			content: counter(count);
+		}
+
+		.hlink{
+			text-decoration: none;
+			text-emphasis-color: black;
 
 		}
-		.article a{
-			display: none;
+		.nav-ref{
+			
+			font-size: 25px;
+			
+			
+		}
+		
+		.sidebar{
+			position: relative;
+			left: 50%;
+			top:50%
 		}
 
 
@@ -77,19 +103,13 @@
 			font-size: 19px;
 			height: 300px;
 			
+			
             	
 		}
 		.article2 .counter{
 		display: none;
 		}
-		.article2 a{
-			text-decoration: underline;
-		}
-		.article2 a:hover{
-			cursor: pointer;
-			color: blue;
-			
-		}
+		
             	
 		
 		
@@ -98,27 +118,48 @@
 	</style>
 </head>
 <body>
+	<nav id="main-nav" class="sidebar">	
+	</nav>
+	<template id="navtemplate">
+		<a class="nav-ref" href="" ></a>
+	</template>
+
 	<div id="content">
 	</div>
 	<template id="template1">
+		<a class="hlink" href=""  >
 		<article class="article">
-			<div class="counter">Count</div>
+			<div class="counter"></div>
+			
+				<img >
+				
+			</div>
+			<div class="text">
+				
+				<h2 class="title"></h2>
+				<p></p>
+			</div>
+			
+		</article>
+	</a>
+	</template>	
+
+	<template id="template2">
+		<article class="article2">
+			<div class="counter"></div>
 			<img >
 			<div class="text">
 				
 				<h2 class="title"></h2>
 				<p></p>
-				<a>Go back</a>
+			<a href="#home" >Go back</a>
 			</div>
 			
 		</article>
 	</template>	
+	
 
 	<script type="text/javascript">
-
-
-		
-			
 
 		function createf(htmlStr) {
 		    var frag = document.createDocumentFragment(),
@@ -129,54 +170,135 @@
 		    return frag;
 		}
 
-		function displayArt(art){
-			if(art.className == 'article'){
-				articleCache = createf(content.innerHTML);
-				
-					while (content.firstChild) 
-						content.removeChild(content.firstChild);
-				art.className='article2';
-				content.appendChild(art);
-			}else{
-				while (content.firstChild) 
-						content.removeChild(content.firstChild);
-				content.appendChild(articleCache);
-			}
-		}
-
-		function populate(data){
-
-			const content= document.getElementById("content");
-			var template =document.getElementById("template1").content,
-			fragment = document.createDocumentFragment(),
-			counter=1;
-			data.forEach(el =>{
-				template.querySelector("img").setAttribute("src",el.img);
-				template.querySelector("h2").textContent =el.title;
-				template.querySelector("p").textContent =el.txt;
-				template.querySelector("div").textContent =counter;
-				counter++;
-				let clone = document.importNode(template,true);
-				fragment.appendChild(clone);
-			});
-			content.appendChild(fragment);
-		}
-
-		function loadJSON(){
+		async function loadMain(){
 			fetch("./data.json")
 			.then(res=>res.json())
-			.then(data =>populate(data));
+			.then(data =>{
+				populateMainP(data);
+
+			});
+		}
+		async function loadArt(n){
+			fetch("./data.json")
+			.then(res=>res.json())
+			.then(data =>{
+				populateArt(data,n);
+
+			});
+		}
+		
+
+		function populateMainP(data){
+
+			const content= document.getElementById("content"), navigation=document.getElementById("main-nav");
+			while(content.firstChild){
+				content.removeChild(content.firstChild);
+			}
+			while(navigation.firstChild){
+				navigation.removeChild(navigation.firstChild);
+			}
+			
+			var template =document.getElementById("template1").content,
+			navtemplate = document.getElementById("navtemplate").content,
+			navfrag=document.createDocumentFragment(),
+			fragment = document.createDocumentFragment();
+			var counter =0;
+			
+			data.forEach(el =>{
+				counter++;
+				navtemplate.querySelector("a").setAttribute("href","#"+counter);
+				navtemplate.querySelector("a").textContent=counter;
+
+				template.querySelector("a").setAttribute("href","#"+counter);
+				template.querySelector("article").setAttribute("id", "art"+counter)
+				template.querySelector("img").setAttribute("src",el.img);
+				template.querySelector("img").setAttribute("href","#"+counter);
+				template.querySelector("h2").textContent =el.title;
+				template.querySelector("p").textContent =el.txt;
+				
+				let clone = document.importNode(template,true);
+				let navclone= document.importNode(navtemplate,true);
+				
+				fragment.appendChild(clone);
+				navfrag.appendChild(navclone);
+			});
+
+			content.appendChild(fragment);
+			navigation.appendChild(navfrag);
+
+			
 		}
 
-		loadJSON();
+		function populateArt(data,n){
+			const content= document.getElementById("content"),navigation=document.getElementById("main-nav");
+			while(content.firstChild){
+				content.removeChild(content.firstChild);
+			}
+			while(navigation.firstChild){
+				navigation.removeChild(navigation.firstChild);
+			}
+			
+			var template =document.getElementById("template2").content,
+			navtemplate = document.getElementById("navtemplate").content,
+			navfrag=document.createDocumentFragment(),
+			fragment = document.createDocumentFragment(),
+			counter=0,
+			el=data[n];
 
-        content.onclick = function(event) {
-            let art = event.target.closest('article');
-            if (!art) return; 
-			displayArt(art);
-            
+			data.forEach(element =>{
+				counter++;
+				navtemplate.querySelector("a").setAttribute("href","#"+counter);
+				navtemplate.querySelector("a").textContent=counter;
 
-        };
+				let navclone= document.importNode(navtemplate,true);
+				navfrag.appendChild(navclone);
+			});
+			
+			template.querySelector("img").setAttribute("src",el.img);
+			template.querySelector("h2").textContent =el.title;
+			template.querySelector("p").textContent =el.txt;
+
+			let clone = document.importNode(template,true);
+			fragment.appendChild(clone);
+
+			content.appendChild(fragment);
+			navigation.appendChild(navfrag);
+			
+
+		}
+
+		
+		
+
+		window.onload= function(){
+			if(location.hash=="#home"||location.hash==""){
+				loadMain();}
+			else{
+				item=location.hash;
+				n=item.slice(1);
+				loadArt(n-1);
+			}
+		}
+		
+		
+		window.addEventListener('hashchange', (event) => {
+			if(location.hash=="#home"||location.hash==""){
+				loadMain();}
+			else{
+				item=location.hash;
+				n=item.slice(1);
+				loadArt(n-1);
+			}
+		});
+
+		
+		
+
+		
+		
+
+		
+
 
 	</script>
 
