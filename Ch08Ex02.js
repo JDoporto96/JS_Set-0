@@ -1,30 +1,45 @@
 //Ch08 Ex02
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
-function A(time){
-    if (time%1==0){
-        console.log("A "+ time +" seg have pased")
+class CentralTimer{
+    constructor(){
+        this.time=0;
+        this.callbacks=[];
     }
-}
-function B(time){
-    if (time%2==0){
-        console.log("B "+ time +" seg have pased")
-    }
-}
-function C(time){
-    if (time%3==0){
-        console.log("C "+ time +" seg have pased")
-    }
-}
+
+    addFunc(func,interval){
+        this.callbacks.push({"function":func,"interval":interval})
+    };
+    run(){
+        setInterval(()=>{
+            this.time++;
+            for(let elem of this.callbacks){
+                if (this.time%elem.interval==0){
+                    elem.function();
+                    
+                }
+            }
 
 
-var time=0;
-function timer(){
-    time+=1;
-    A(time);
-    B(time);
-    C(time);
-
+        },1)
+    };
 }
 
-setInterval(timer,1000);
+function A(){
+    console.log("A ")
+}
+function B(){
+    console.log("B ")
+}
+function C(){
+    console.log("C ")
+}
+
+timer= new CentralTimer;
+timer.addFunc(A,3000);
+timer.addFunc(B,6000);
+timer.addFunc(C,7500);
+
+timer.run();
+
+

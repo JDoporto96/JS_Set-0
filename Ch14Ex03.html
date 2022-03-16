@@ -118,6 +118,7 @@
 	</style>
 </head>
 <body>
+	
 	<nav id="main-nav" class="sidebar">	
 	</nav>
 	<template id="navtemplate">
@@ -157,34 +158,22 @@
 			
 		</article>
 	</template>	
-	
+
 
 	<script type="text/javascript">
 
-		function createf(htmlStr) {
-		    var frag = document.createDocumentFragment(),
-		        temp = document.createElement('div');
-		    temp.innerHTML = htmlStr;
-		    while (temp.firstChild) 
-		        frag.appendChild(temp.firstChild);
-		    return frag;
-		}
+		var data=[];
+		cacheData();
 
 		async function loadMain(){
-			fetch("./data.json")
-			.then(res=>res.json())
-			.then(data =>{
-				populateMainP(data);
-
-			});
+			
+				let res = await fetch("./data.json")
+				return await res.json();			
 		}
-		async function loadArt(n){
-			fetch("./data.json")
-			.then(res=>res.json())
-			.then(data =>{
-				populateArt(data,n);
 
-			});
+		async function cacheData(){
+			let source = await loadMain();
+			data.push(...source);	
 		}
 		
 
@@ -221,12 +210,13 @@
 				
 				fragment.appendChild(clone);
 				navfrag.appendChild(navclone);
+
 			});
 
 			content.appendChild(fragment);
 			navigation.appendChild(navfrag);
-
 			
+
 		}
 
 		function populateArt(data,n){
@@ -264,33 +254,39 @@
 			content.appendChild(fragment);
 			navigation.appendChild(navfrag);
 			
-
+			
 		}
 
 		
 		
-
+	
 		window.onload= function(){
 			if(location.hash=="#home"||location.hash==""){
-				loadMain();}
+				populateMainP(data);
+				}
+				
 			else{
 				item=location.hash;
 				n=item.slice(1);
-				loadArt(n-1);
+				populateArt(data,n-1);
 			}
 		}
 		
 		
 		window.addEventListener('hashchange', (event) => {
 			if(location.hash=="#home"||location.hash==""){
-				loadMain();}
+					populateMainP(data)
+						
+			}
 			else{
 				item=location.hash;
 				n=item.slice(1);
-				loadArt(n-1);
+				populateArt(data,n-1);
 			}
 		});
 
+		
+		
 		
 		
 

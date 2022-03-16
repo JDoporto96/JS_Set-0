@@ -2,24 +2,38 @@
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 class ObjVal{
-    #value;
+    #val;
     constructor(n){
         if (typeof(n)=="number"){
-            this.#value = n;
+            this.#val = n;
         }
         else{
-            throw new Error("n must be a number"); 
+            throw new Error("value must be a number"); 
         }
        
     }
-    get getValue(){return this.#value;}
+    get value(){
+        return this.#val;
+    }
+    set value(value){
+        if (typeof(value)=="number"){
+            this.#val = value;
+        }
+        else{
+            throw new Error("value must be a number"); 
+        }
+
+    }
+
 }
 
-testobj= new ObjVal(23);
-console.log(testobj.getValue);
+const o=  new ObjVal(30);
 
-testobj.value=15;
-console.log(testobj.getValue);
+console.log(o.value);
+
+o.value=45;
+console.log(o.value);
+
 
 
 

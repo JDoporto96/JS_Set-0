@@ -13,14 +13,16 @@
     </meter>
     
 <script type="text/javascript">
-    button = document.getElementById("myButton");
+    const button = document.getElementById("myButton");
+    {let count=0;
     button.addEventListener("click",function handler(){
-        var met=document.getElementById("counter");
-        met.value++;
-        if(met.value==3){
+        const met=document.getElementById("counter");
+        count++;
+        met.value=count
+        if(count==3){
             button.removeEventListener("click",handler);
         }
-    });
+    });}
 
 </script>
 </body>
