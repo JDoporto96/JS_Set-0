@@ -4,13 +4,7 @@
 class ObjVal{
     #val;
     constructor(n){
-        if (typeof(n)=="number"){
-            this.#val = n;
-        }
-        else{
-            throw new Error("value must be a number"); 
-        }
-       
+        this.value=n;
     }
     get value(){
         return this.#val;
@@ -27,7 +21,7 @@ class ObjVal{
 
 }
 
-const o=  new ObjVal(30);
+const o=  new ObjVal(50);
 
 console.log(o.value);
 
